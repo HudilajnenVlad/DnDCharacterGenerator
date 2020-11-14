@@ -22,29 +22,38 @@ public:
     FOREST_GNOME, ROCKY_GNOME, HALF_ELF, HALF_ORC, TIEFLING
   };
 
-  Warior();
+  Warior(int level = 1);
 
-  void chooseRace();
+  void printCharacter(std::ostream &out = std::cout);
 
-  void chooseBattleStyle();
+  void printRace(std::ostream &out = std::cout);
 
-  void printCharacter(std::ostream &out);
+  void printStats(std::ostream &out = std::cout);
 
-  void printRace(std::ostream &out);
-
-  void printStats(std::ostream &out);
+  void printHP(std::ostream &out = std::cout);
 
   bool isForceBuild();
 
 private:
+  int level_;
+  int masteryBonus_;
   int STR_;
   int DEX_;
   int CON_;
   int INT_;
   int WIS_;
   int CHR_;
+  int HP_;
   BattleStyle style_;
   Race race_;
+
+  void setMasteryBonus();
+
+  void chooseRace();
+
+  void chooseBattleStyle();
+
+  void setHP();
 };
 
 

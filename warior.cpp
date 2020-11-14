@@ -4,12 +4,13 @@
 #include <random>
 #include <chrono>
 
-Warior::Warior()
+Warior::Warior(int level)
 {
+  level_ = level;
+  setMasteryBonus();
   int *stats = new int[6];
   fillStats(stats);
   chooseBattleStyle();
-
   switch (style_)
   {
     case DUELIST:
@@ -62,11 +63,12 @@ Warior::Warior()
       break;
   }
   chooseRace();
+  setHP();
 }
 
 void Warior::chooseBattleStyle()
 {
-  style_ = BattleStyle(rollD6());
+  style_ = BattleStyle(rollD());
 }
 
 void Warior::printStats(std::ostream &out)
@@ -87,47 +89,54 @@ void Warior::printCharacter(std::ostream &out)
   {
     case DUELIST:
       out << "Battle style - Duelist\n";
+      printHP(out);
       out << "Armor Rating - " << 14 + (DEX_ - 10) / 2 << " Riveted leather armor and shield\n";
-      out << "Rapier. Melee weapon attack: +" << (DEX_ - 10) / 2 + 2
+      out << "Rapier. Melee weapon attack: +" << (DEX_ - 10) / 2 + masteryBonus_
           << ", reach 5 ft, one goal. Hit: Piercing damage 1d8+" << (DEX_ - 10) / 2 + 2 << '\n';
       break;
     case ARCHER:
       out << "Battle style - Archer\n";
+      printHP(out);
       out << "Armor Rating - " << 12 + (DEX_ - 10) / 2 << " Riveted leather armor\n";
-      out << "Long bow. Range weapon attack: +" << (DEX_ - 10) / 2 + 2 + 2
+      out << "Long bow. Range weapon attack: +" << (DEX_ - 10) / 2 + masteryBonus_ + 2
           << ", reach 150/600 ft, one goal. Hit: Piercing damage 1d8+" << (DEX_ - 10) / 2 << '\n';
       out << "Scimitar sword. Melee weapon attack: +" << (DEX_ - 10) / 2 + 2
           << ", reach 5 ft, one goal. Hit: Cutting damage 1d6+" << (DEX_ - 10) / 2 << '\n';
       break;
     case TWO_WEAPON:
       out << "Battle style - Two Weapon\n";
+      printHP(out);
       out << "Armor Rating - " << 12 + (DEX_ - 10) / 2 << " Riveted leather armor\n";
       out << "Multiattack: Makes 2 attacks with a short sword\n";
-      out << "Short sword. Melee weapon attack: +" << (DEX_ - 10) / 2 + 2
+      out << "Short sword. Melee weapon attack: +" << (DEX_ - 10) / 2 + masteryBonus_
           << ", reach 5 ft, one goal. Hit: Piercing damage 1d6+" << (DEX_ - 10) / 2 << '\n';
       break;
     case BIG_WEAPON:
+      out<< "Battle style - Big weapons \n";
+      printHP(out);
       out << "Armor Rating - " << 14 + (((DEX_ - 10) / 2) > 2 ? 2 : ((DEX_ - 10) / 2)) << " Scaly armor\n";
       out << "Master of Big Weapon: If you have a\" 1 \"or\" 2 \" on the weapon's damage dice during an attack"
           << "that you made with a melee weapon while holding it with two hands, then you can roll this dice,"
           << " and must use the new result, even if a \"1\" or \"2\" is rolled again."
           << "To take advantage of this advantage, your weapon must have the \"two-handed\" or \"universal\"property.\n";
 
-      out << "Two-Handed-Sword. Melee weapon attack: +" << (STR_ - 10) / 2 + 2
+      out << "Two-Handed-Sword. Melee weapon attack: +" << (STR_ - 10) / 2 + masteryBonus_
           << ", reach 5 ft, one goal. Hit: Cutting damage 2d6+" << (STR_ - 10) / 2 << '\n';
       break;
     case DEFENCE:
       out << "Battle style - Defence\n";
+      printHP(out);
       out << "Armor Rating - " << 19 << " Chain mail + shield\n";
-      out << "Long Sword. Melee weapon attack: +" << (STR_ - 10) / 2 + 2
+      out << "Long Sword. Melee weapon attack: +" << (STR_ - 10) / 2 + masteryBonus_
           << ", reach 5 ft, one goal. Hit: Cutting damage 1d8+" << (STR_ - 10) / 2 << '\n';
       break;
     case PROTECTION:
       out << "Battle style - Protection\n";
+      printHP(out);
       out << "Armor Rating - " << 18 << " Chain mail + shield\n";
       out << "Defence Master: If the creature you see is not attacking you, but another creature within 5 ft."
           << " from you, you can react to interfere with his attack roll. To do this, you must use a shield.\n";
-      out << "Warhammer. Melee weapon attack: +" << (STR_ - 10) / 2 + 2
+      out << "Warhammer. Melee weapon attack: +" << (STR_ - 10) / 2 + masteryBonus_
           << ", reach 5 ft, one goal. Hit: Crushing damage 1d8+" << (STR_ - 10) / 2 << '\n';
       break;
   }
@@ -187,9 +196,7 @@ void Warior::printRace(std::ostream &out)
 
 void Warior::chooseRace()
 {
-  static std::default_random_engine gen(std::chrono::steady_clock::now().time_since_epoch().count());
-  std::uniform_int_distribution<int> distribution(1, 14);
-  race_ = Race(distribution(gen));
+  race_ = Race(rollD(1, 14));
   switch (race_)
   {
     case HUMAN:
@@ -297,6 +304,46 @@ bool Warior::isForceBuild()
   return (style_ == DEFENCE || style_ == PROTECTION || style_ == BIG_WEAPON);
 }
 
+void Warior::setMasteryBonus()
+{
+  if (level_ <= 4)
+  {
+    masteryBonus_ = 2;
+  }
+  else if (level_ <= 8)
+  {
+    masteryBonus_ = 3;
+  }
+  else if (level_ <= 12)
+  {
+    masteryBonus_ = 4;
+  }
+  else if (level_ <= 16)
+  {
+    masteryBonus_ = 5;
+  }
+  else
+  {
+    masteryBonus_ = 6;
+  }
+}
+
+void Warior::setHP()
+{
+  HP_ = 10 + (CON_ - 10) / 2;
+  if (level_ != 1)
+  {
+    for (int i = 1; i < level_; ++i)
+    {
+      HP_ += rollD(1, 10) + (CON_ - 10) / 2;
+    }
+  }
+}
+
+void Warior::printHP(std::ostream &out)
+{
+  out << "HP: " << HP_ << '\n';
+}
 /*
   switch (race_)
   {
