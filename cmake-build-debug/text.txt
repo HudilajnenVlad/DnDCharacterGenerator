@@ -1,0 +1,81 @@
+Race: Mountain Dwarf
+HP: 21
+Armor Rating - 18 Chain mail + shield
+
+     STR     DEX     CON     INT     WIS     CHR
+      15      12      19       9      13      12
+
+Battle style - Protection
+Defence Master: If the creature you see is not attacking you, but another creature within 5 ft. from you, you can react to interfere with his attack roll. To do this, you must use a shield.
+Warhammer. Melee weapon attack: +4, reach 5 ft, one goal. Hit: Crushing damage 1d8+2
+
+Race: Hill Dwarf
+HP: 12
+Armor Rating - 15 Riveted leather armor
+
+     STR     DEX     CON     INT     WIS     CHR
+       9      17      15      12      15      12
+
+Battle style - Archer
+You get a + 2 bonus to your attack roll when you attack with a long-range weapon.
+Long bow. Range weapon attack: +7, reach 150/600 ft, one goal. Hit: Piercing damage 1d8+3
+Scimitar sword. Melee weapon attack: +5, reach 5 ft, one goal. Hit: Cutting damage 1d6+3
+
+Race: Hill Dwarf
+HP: 13
+Armor Rating - 15 Riveted leather armor
+
+     STR     DEX     CON     INT     WIS     CHR
+      14      17      17      11      13      12
+
+Battle style - Two Weapon
+If you fight with two weapons, you can add a characteristic modifier to the damage from the second attack.
+Multiattack: Makes 2 attacks with a short sword
+Short sword. Melee weapon attack: +5, reach 5 ft, one goal. Hit: Piercing damage 1d6+3
+
+Race: Human
+HP: 13
+Armor Rating - 18 Chain mail + shield
+
+     STR     DEX     CON     INT     WIS     CHR
+      16      18      17       9      16      15
+
+Battle style - Protection
+Defence Master: If the creature you see is not attacking you, but another creature within 5 ft. from you, you can react to interfere with his attack roll. To do this, you must use a shield.
+Warhammer. Melee weapon attack: +5, reach 5 ft, one goal. Hit: Crushing damage 1d8+3
+
+Race: Dragonborn
+HP: 12
+Armor Rating - 16 Scaly armor
+
+     STR     DEX     CON     INT     WIS     CHR
+      19      15      15       9      14      12
+
+Battle style - Big weapons 
+Master of Big Weapon: If you have a" 1 "or" 2 " on the weapon's damage dice during an attackthat you made with a melee weapon while holding it with two hands, 
+then you can roll this dice, and must use the new result, even if a "1" or "2" is rolled again.
+To take advantage of this advantage, your weapon must have the "two-handed" or "universal"property.
+Two-Handed-Sword. Melee weapon attack: +6, reach 5 ft, one goal. Hit: Cutting damage 2d6+4
+
+Race: Drow
+HP: 12
+Armor Rating - 18 Riveted leather armor and shield
+
+     STR     DEX     CON     INT     WIS     CHR
+       8      18      15      11       8      15
+
+Battle style - Duelist:
+As long as you hold a melee weapon in one hand and don't use another weapon, you get a +2 bonus to damage rolls with that weapon. 
+Rapier. Melee weapon attack: +6, reach 5 ft, one goal. Hit: Piercing damage 1d8+6
+
+Race: Half-Orc
+HP: 13
+Armor Rating - 19 Chain mail + shield
+
+     STR     DEX     CON     INT     WIS     CHR
+      17      12      16      16      14      11
+
+Battle style - Defence
+As long as you wear the armor, you get a + 1 bonus to AR.
+Long Sword. Melee weapon attack: +5, reach 5 ft, one goal. Hit: Cutting damage 1d8+3
+

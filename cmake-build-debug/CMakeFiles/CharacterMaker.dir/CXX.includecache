@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/CharacterMaker/main.cpp
+iostream
+-
+random
+-
+chrono
+-
+fstream
+-
+warior.hpp
+C:/CharacterMaker/warior.hpp
+
+C:/CharacterMaker/warior.hpp
+iostream
+-
+
