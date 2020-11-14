@@ -3,6 +3,7 @@
 #include <iostream>
 #include <random>
 #include <chrono>
+#include <iomanip>
 
 Warior::Warior(int level)
 {
@@ -73,73 +74,32 @@ void Warior::chooseBattleStyle()
 
 void Warior::printStats(std::ostream &out)
 {
-  out << "STR = " << STR_ << '\n';
-  out << "DEX = " << DEX_ << '\n';
-  out << "CON = " << CON_ << '\n';
-  out << "INT = " << INT_ << '\n';
-  out << "WIS = " << WIS_ << '\n';
-  out << "CHR = " << CHR_ << '\n';
+  out << '\n';
+  out << std::setw(8) << "STR";
+  out << std::setw(8) << "DEX";
+  out << std::setw(8) << "CON";
+  out << std::setw(8) << "INT";
+  out << std::setw(8) << "WIS";
+  out << std::setw(8) << "CHR";
+  out << '\n';
+  out << std::setw(8) << STR_;
+  out << std::setw(8) << DEX_;
+  out << std::setw(8) << CON_;
+  out << std::setw(8) << INT_;
+  out << std::setw(8) << WIS_;
+  out << std::setw(8) << CHR_;
+  out << '\n';
+  out << '\n';
 }
 
 void Warior::printCharacter(std::ostream &out)
 {
-  printStats(out);
   printRace(out);
-  switch (style_)
-  {
-    case DUELIST:
-      out << "Battle style - Duelist\n";
-      printHP(out);
-      out << "Armor Rating - " << 14 + (DEX_ - 10) / 2 << " Riveted leather armor and shield\n";
-      out << "Rapier. Melee weapon attack: +" << (DEX_ - 10) / 2 + masteryBonus_
-          << ", reach 5 ft, one goal. Hit: Piercing damage 1d8+" << (DEX_ - 10) / 2 + 2 << '\n';
-      break;
-    case ARCHER:
-      out << "Battle style - Archer\n";
-      printHP(out);
-      out << "Armor Rating - " << 12 + (DEX_ - 10) / 2 << " Riveted leather armor\n";
-      out << "Long bow. Range weapon attack: +" << (DEX_ - 10) / 2 + masteryBonus_ + 2
-          << ", reach 150/600 ft, one goal. Hit: Piercing damage 1d8+" << (DEX_ - 10) / 2 << '\n';
-      out << "Scimitar sword. Melee weapon attack: +" << (DEX_ - 10) / 2 + 2
-          << ", reach 5 ft, one goal. Hit: Cutting damage 1d6+" << (DEX_ - 10) / 2 << '\n';
-      break;
-    case TWO_WEAPON:
-      out << "Battle style - Two Weapon\n";
-      printHP(out);
-      out << "Armor Rating - " << 12 + (DEX_ - 10) / 2 << " Riveted leather armor\n";
-      out << "Multiattack: Makes 2 attacks with a short sword\n";
-      out << "Short sword. Melee weapon attack: +" << (DEX_ - 10) / 2 + masteryBonus_
-          << ", reach 5 ft, one goal. Hit: Piercing damage 1d6+" << (DEX_ - 10) / 2 << '\n';
-      break;
-    case BIG_WEAPON:
-      out<< "Battle style - Big weapons \n";
-      printHP(out);
-      out << "Armor Rating - " << 14 + (((DEX_ - 10) / 2) > 2 ? 2 : ((DEX_ - 10) / 2)) << " Scaly armor\n";
-      out << "Master of Big Weapon: If you have a\" 1 \"or\" 2 \" on the weapon's damage dice during an attack"
-          << "that you made with a melee weapon while holding it with two hands, then you can roll this dice,"
-          << " and must use the new result, even if a \"1\" or \"2\" is rolled again."
-          << "To take advantage of this advantage, your weapon must have the \"two-handed\" or \"universal\"property.\n";
-
-      out << "Two-Handed-Sword. Melee weapon attack: +" << (STR_ - 10) / 2 + masteryBonus_
-          << ", reach 5 ft, one goal. Hit: Cutting damage 2d6+" << (STR_ - 10) / 2 << '\n';
-      break;
-    case DEFENCE:
-      out << "Battle style - Defence\n";
-      printHP(out);
-      out << "Armor Rating - " << 19 << " Chain mail + shield\n";
-      out << "Long Sword. Melee weapon attack: +" << (STR_ - 10) / 2 + masteryBonus_
-          << ", reach 5 ft, one goal. Hit: Cutting damage 1d8+" << (STR_ - 10) / 2 << '\n';
-      break;
-    case PROTECTION:
-      out << "Battle style - Protection\n";
-      printHP(out);
-      out << "Armor Rating - " << 18 << " Chain mail + shield\n";
-      out << "Defence Master: If the creature you see is not attacking you, but another creature within 5 ft."
-          << " from you, you can react to interfere with his attack roll. To do this, you must use a shield.\n";
-      out << "Warhammer. Melee weapon attack: +" << (STR_ - 10) / 2 + masteryBonus_
-          << ", reach 5 ft, one goal. Hit: Crushing damage 1d8+" << (STR_ - 10) / 2 << '\n';
-      break;
-  }
+  printHP(out);
+  printAR(out);
+  printStats(out);
+  printBattleStyle(out);
+  printAttack(out);
   out << '\n';
 }
 
@@ -344,36 +304,100 @@ void Warior::printHP(std::ostream &out)
 {
   out << "HP: " << HP_ << '\n';
 }
-/*
-  switch (race_)
+
+void Warior::printAR(std::ostream &out)
+{
+  switch (style_)
   {
-    case HUMAN:
+    case DUELIST:
+      out << "Armor Rating - " << 14 + (DEX_ - 10) / 2 << " Riveted leather armor and shield\n";
       break;
-    case MOUNTAIN_DWARF:
+    case ARCHER:
+      out << "Armor Rating - " << 12 + (DEX_ - 10) / 2 << " Riveted leather armor\n";
       break;
-    case HILL_DWARF:
+    case TWO_WEAPON:
+      out << "Armor Rating - " << 12 + (DEX_ - 10) / 2 << " Riveted leather armor\n";
       break;
-    case HIGH_ELF:
+    case BIG_WEAPON:
+      out << "Armor Rating - " << 14 + (((DEX_ - 10) / 2) > 2 ? 2 : ((DEX_ - 10) / 2)) << " Scaly armor\n";
       break;
-    case FOREST_ELF:
+    case DEFENCE:
+      out << "Armor Rating - " << 19 << " Chain mail + shield\n";
       break;
-    case DROW:
-      break;
-    case STOCKY_HALFLING:
-      break;
-    case LIGHTFOOT_HALFLING:
-      break;
-    case DRAGONBORN:
-      break;
-    case FOREST_GNOME:
-      break;
-    case ROCKY_GNOME:
-      break;
-    case HALF_ELF:
-      break;
-    case HALF_ORC:
-      break;
-    case TIEFLING:
+    case PROTECTION:
+      out << "Armor Rating - " << 18 << " Chain mail + shield\n";
       break;
   }
- */
+}
+
+void Warior::printAttack(std::ostream &out)
+{
+  switch (style_)
+  {
+    case DUELIST:
+      out << "Rapier. Melee weapon attack: +" << (DEX_ - 10) / 2 + masteryBonus_
+          << ", reach 5 ft, one goal. Hit: Piercing damage 1d8+" << (DEX_ - 10) / 2 + 2 << '\n';
+      break;
+    case ARCHER:
+      out << "Long bow. Range weapon attack: +" << (DEX_ - 10) / 2 + masteryBonus_ + 2
+          << ", reach 150/600 ft, one goal. Hit: Piercing damage 1d8+" << (DEX_ - 10) / 2 << '\n';
+      out << "Scimitar sword. Melee weapon attack: +" << (DEX_ - 10) / 2 + 2
+          << ", reach 5 ft, one goal. Hit: Cutting damage 1d6+" << (DEX_ - 10) / 2 << '\n';
+      break;
+    case TWO_WEAPON:
+      out << "Multiattack: Makes 2 attacks with a short sword\n";
+      out << "Short sword. Melee weapon attack: +" << (DEX_ - 10) / 2 + masteryBonus_
+          << ", reach 5 ft, one goal. Hit: Piercing damage 1d6+" << (DEX_ - 10) / 2 << '\n';
+      break;
+    case BIG_WEAPON:
+      out << "Two-Handed-Sword. Melee weapon attack: +" << (STR_ - 10) / 2 + masteryBonus_
+          << ", reach 5 ft, one goal. Hit: Cutting damage 2d6+" << (STR_ - 10) / 2 << '\n';
+      break;
+    case DEFENCE:
+      out << "Long Sword. Melee weapon attack: +" << (STR_ - 10) / 2 + masteryBonus_
+          << ", reach 5 ft, one goal. Hit: Cutting damage 1d8+" << (STR_ - 10) / 2 << '\n';
+      break;
+    case PROTECTION:
+      out << "Warhammer. Melee weapon attack: +" << (STR_ - 10) / 2 + masteryBonus_
+          << ", reach 5 ft, one goal. Hit: Crushing damage 1d8+" << (STR_ - 10) / 2 << '\n';
+      break;
+  }
+}
+
+void Warior::printBattleStyle(std::ostream &out)
+{
+  switch (style_)
+  {
+    case DUELIST:
+      out << "Battle style - Duelist:\n";
+      out << "As long as you hold a melee weapon in one hand and don't use another weapon,"
+          << " you get a +2 bonus to damage rolls with that weapon. \n";
+      break;
+    case ARCHER:
+      out << "Battle style - Archer\n";
+      out << "You get a + 2 bonus to your attack roll when you attack with a long-range weapon.\n";
+      break;
+    case TWO_WEAPON:
+      out << "Battle style - Two Weapon\n";
+      out
+          << "If you fight with two weapons, you can add a characteristic modifier to the damage from the second attack.\n";
+      break;
+    case BIG_WEAPON:
+      out << "Battle style - Big weapons \n";
+      out << "Master of Big Weapon: If you have a\" 1 \"or\" 2 \" on the weapon's damage dice during an attack"
+          << "that you made with a melee weapon while holding it with two hands, \nthen you can roll this dice,"
+          << " and must use the new result, even if a \"1\" or \"2\" is rolled again."
+          << "\nTo take advantage of this advantage, your weapon must have the \"two-handed\" or \"universal\"property.\n";
+      break;
+    case DEFENCE:
+      out << "Battle style - Defence\n";
+      out << "As long as you wear the armor, you get a + 1 bonus to AR.\n";
+      break;
+    case PROTECTION:
+      out << "Battle style - Protection\n";
+      out << "Defence Master: If the creature you see is not attacking you, but another creature within 5 ft."
+          << " from you, you can react to interfere with his attack roll. To do this, you must use a shield.\n";
+      break;
+  }
+}
+

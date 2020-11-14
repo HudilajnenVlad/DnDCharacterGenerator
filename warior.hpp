@@ -32,6 +32,12 @@ public:
 
   void printHP(std::ostream &out = std::cout);
 
+  void printAttack(std::ostream &out = std::cout);
+
+  void printAR(std::ostream &out = std::cout);
+
+  void printBattleStyle(std::ostream &out = std::cout);
+
   bool isForceBuild();
 
 private:
