@@ -3,10 +3,10 @@
 #include <random>
 #include <chrono>
 
-int rollD6()
+int rollD(int left, int right)
 {
   static std::default_random_engine gen(std::chrono::steady_clock::now().time_since_epoch().count());
-  std::uniform_int_distribution<int> distribution(1, 6);
+  std::uniform_int_distribution<int> distribution(left, right);
   return distribution(gen);
 }
 
@@ -14,7 +14,7 @@ void fillD6(int *array, size_t size)
 {
   for (size_t i = 0; i < size; ++i)
   {
-    array[i] = rollD6();
+    array[i] = rollD();
   }
 }
 

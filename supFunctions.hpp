@@ -4,7 +4,7 @@
 
 void fillD6(int *array, size_t size = 4);
 
-int rollD6();
+int rollD(int left = 1, int right = 6);
 
 void sort(int *array, size_t size = 4);
 
