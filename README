@@ -1,0 +1,38 @@
+# DnDCharacterGenerator
+
+**Base templates**
+
+***Ability template***
+1. Level (size_t)
+2. Name (string)
+3. Description (string)
+4. isArchetype (1/0)
+5. Amount of abilities if isArchetype==1 (size_t)
+6. List of related abilities
+
+***Races template***
+1. Name
+2. Sequense of modifyers base modifyers (0 = nothing, 1 = possesion)
+3. Sequense of skills possesions (-1 = interfearense, 0 = nothing, 1 = possesion)
+4. Sequense of save rolls possesion (0 = nothing, 1 = possesion)
+5. Amount of abilities (size_t)
+6. List of related abilities (in ability template)
+
+***Classes template***
+1. Name
+2. Sequense of modifyers base modifyers (0 = nothing, 1 = possesion)
+3. Sequense of skills possesions (-1 = interfearense, 0 = nothing, 1 = possesion)
+4. Sequense of save rolls possesion (0 = nothing, 1 = possesion)
+5. Amount of abilities (size_t)
+6. List of related abilities (in ability template)
+
+
+**Config Template**
+1. Amount of races
+2. List of races
+3. Amount of classes
+4. List of classes
+
+**Importatnt tips**
+1. All new point in template places on new line, all parameters on one line divided by whitespace
+2. Magic is not supported yet
