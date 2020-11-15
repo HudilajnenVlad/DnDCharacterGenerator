@@ -40,6 +40,14 @@ public:
 
   bool isForceBuild();
 
+  void printTrait(int index, std::ostream &out = std::cout);
+
+  void printPrehistory(std::ostream &out = std::cout);
+
+  void printAbilities(std::ostream &out = std::cout);
+
+  void printActionSplash(std::ostream &out = std::cout);
+
 private:
   int level_;
   int masteryBonus_;

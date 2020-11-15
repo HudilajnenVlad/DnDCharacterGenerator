@@ -8,7 +8,7 @@ int main()
 {
   std::ofstream out;
   out.open("text.txt");
-  Warior warior;
+  Warior warior(2);
   Warior warior1;
   Warior warior2;
   Warior warior3;
