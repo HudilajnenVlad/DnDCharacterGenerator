@@ -69,7 +69,7 @@ Warior::Warior(int level)
 
 void Warior::chooseBattleStyle()
 {
-  style_ = BattleStyle(rollD());
+  style_ = battleStyle_t(rollD());
 }
 
 void Warior::printStats(std::ostream &out)
@@ -158,7 +158,7 @@ void Warior::printRace(std::ostream &out)
 
 void Warior::chooseRace()
 {
-  race_ = Race(rollD(1, 14));
+  race_ = race_t(rollD(1, 14));
   switch (race_)
   {
     case HUMAN:

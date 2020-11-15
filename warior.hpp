@@ -6,7 +6,7 @@
 class Warior
 {
 public:
-  enum BattleStyle
+  enum battleStyle_t
   {
     DUELIST = 1,
     PROTECTION,
@@ -16,7 +16,7 @@ public:
     ARCHER
   };
 
-  enum Race
+  enum race_t
   {
     HUMAN = 1, MOUNTAIN_DWARF, HILL_DWARF, HIGH_ELF, FOREST_ELF, DROW, STOCKY_HALFLING, LIGHTFOOT_HALFLING, DRAGONBORN,
     FOREST_GNOME, ROCKY_GNOME, HALF_ELF, HALF_ORC, TIEFLING
@@ -58,8 +58,8 @@ private:
   int WIS_;
   int CHR_;
   int HP_;
-  BattleStyle style_;
-  Race race_;
+  battleStyle_t style_;
+  race_t race_;
 
   void setMasteryBonus();
 
